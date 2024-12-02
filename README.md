@@ -1,6 +1,7 @@
 # software_trends_mojo_labo
 
-docker compose -d up
-http://localhost:8888
+## Opzetten:
+- `docker compose up`
+- Ga naar `http://localhost:8888`
 
-Bekijk de 3 notebooks hiernaast
+Bekijk de 3 notebooks hiernaast. Je kan deze notebooks op het platform op localhost draaien. Bestudeer in detail de code?
