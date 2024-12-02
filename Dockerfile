@@ -12,17 +12,20 @@ RUN apt-get update && apt-get install -y \
     apt-get clean
 
 # Install Magic (Mojo environment manager)
-RUN curl -ssL https://magic.modular.com/ | bash
+RUN curl -sSL https://magic.modular.com/ | bash && \
+    echo "source /root/.magic/setup" >> /root/.bashrc
 
-# Set environment variables for Magic
+# Add Magic to PATH
 ENV PATH="/root/.magic/bin:$PATH"
 
-# Create a virtual environment for Mojo
-RUN mkdir /workspace && \
-    cd /workspace && \
-    magic init mojo-dev --format mojoproject && \
-    cd mojo-dev && \
-    magic shell
+# Set up a workspace directory
+WORKDIR /workspace
 
 # Install Jupyter Notebook
-RUN pip3 install notebook
+RUN pip3 install --upgrade pip && pip3 install notebook
+
+# Expose Jupyter port
+EXPOSE 8888
+
+# Default command
+CMD ["bash", "-c", "source /root/.magic/setup && bash"]
